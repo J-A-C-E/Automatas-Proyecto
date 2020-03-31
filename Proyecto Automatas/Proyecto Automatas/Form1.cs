@@ -25,6 +25,8 @@ namespace Proyecto_Automatas
 
         static string cadenaConexion = "SERVER=" + servidor + "; PORT=" + puerto+";Database=bdJace" + ";UID=" + usuario +
                 ";PASSWORD=" + contrasena + ";";
+
+        MySqlConnection miconexion = new MySqlConnection(cadenaConexion);
         #endregion
 
         #region RELLENO QUE NO SIRVE
@@ -42,7 +44,6 @@ namespace Proyecto_Automatas
         private void btnConectar_Click(object sender, EventArgs e)
         {
 
-            MySqlConnection miconexion = new MySqlConnection(cadenaConexion);
 
             //string Cadena;
 
@@ -107,7 +108,12 @@ namespace Proyecto_Automatas
 
         private void button1_Click(object sender, EventArgs e)
         {
+            string Cadena = txtFrase.Text;
+            for (int i = 0; i < Cadena.Length; i++)
+            {
+                MessageBox.Show(Cadena[i].ToString());
 
+            }
         }
 
         #endregion
@@ -121,9 +127,10 @@ namespace Proyecto_Automatas
             MySqlDataAdapter da;
             DataSet ds;
             string query;
+            int renglon = 1 ;
 
 
-            string Cadena = txtFrase.Text.Trim();
+            string Cadena = txtFrase.Text;
             string Mensaje;
             int apuntadorID = 0;
             bool Espacio = false;
@@ -134,21 +141,49 @@ namespace Proyecto_Automatas
                 MessageBox.Show(Cadena[i].ToString());
                 Mensaje = Cadena[i].ToString();
                 txtSubcadena.Text = txtSubcadena.Text + Mensaje;
-
+                
                 if (Cadena[i] == ' ')
                 {
-                    //DETECTA SI HAY UN ESPACIO
-                    MessageBox.Show("Aqui hay un espacio");
-                    Espacio = true;
-                    MessageBox.Show(Espacio.ToString());
-                    //apuntadorID++;
-                    Recorrido(ref apuntadorID, ref Mensaje, ref Espacio);
+                    try
+                    {
+
+                        txtSubcadena.Clear();
+                        if (Cadena[i+1] == '\n')
+                        {
+                            Espacio = true;
+                            Recorrido(ref apuntadorID, ref Mensaje, ref Espacio);
+                        }
+                        else if (Cadena[i + 2] == '\n')
+                        {
+                            Espacio = true;
+                            Recorrido(ref apuntadorID, ref Mensaje, ref Espacio);
+                            MessageBox.Show("Salto de línea");
+                            txtArchivo.Text = txtArchivo.Text + "\n" + txtToken.Text + "\n";
+                            apuntadorID = 0;
+                            i = i + 2;
+                            renglon++;
+                            txtRenglon.Text = renglon.ToString();
+                            txtToken.Clear();
+                        }
+                        else
+                        {
+                            //DETECTA SI HAY UN ESPACIO
+                            Espacio = true;
+                            //apuntadorID++;
+                            Recorrido(ref apuntadorID, ref Mensaje, ref Espacio);
+                        }
+                    }
+                    catch (Exception E)
+                    {
+                        MessageBox.Show("Fin de instrucción");
+                    }
+                   
 
                 }
                 else
                 {
                     Recorrido(ref apuntadorID, ref Mensaje, ref Espacio);
-                    /*query = "SELECT Z" + Cadena[i] + " FROM Matriz where ID=" + apuntadorID.ToString() + " ;";
+                    /*query = "SELECT `Z" + Cadena[i] + "` FROM Matriz where ID=" + apuntadorID.ToString() + " ;";
                     da = new MySqlDataAdapter(query, conexionBD);
                     ds = new DataSet();
                     da.Fill(ds);
@@ -178,6 +213,7 @@ namespace Proyecto_Automatas
 
             if(Espacio)
             {
+
                 Entra = true;
                 query = "SELECT DEL FROM Matriz where ID=" + apuntadorID.ToString() + " ;";
                 da = new MySqlDataAdapter(query, conexionBD);
@@ -195,10 +231,13 @@ namespace Proyecto_Automatas
                 }
 
             }
+            else if (Cadena == " ")
+            {
+               
+            }
             else
             {
-                MessageBox.Show("La cadena es igual a :" + Cadena);
-                query = "SELECT Z" + Cadena + " FROM Matriz where ID=" + apuntadorID.ToString() + " ;";
+                query = "SELECT `Z" + Cadena + "` FROM Matriz where ID=" + apuntadorID.ToString() + " ;";
                 da = new MySqlDataAdapter(query, conexionBD);
                 ds = new DataSet();
                 da.Fill(ds);
@@ -229,7 +268,7 @@ namespace Proyecto_Automatas
 
                     //OBTIENE EL VALOR DEL APUNTADOR
                     Token = (dataGridView1.Rows[0].Cells[0].Value.ToString());
-                    txtToken.Text = txtToken.Text + Token;
+                    txtToken.Text = txtToken.Text + Token + " ";
                     apuntadorID = 0;
                     MessageBox.Show("EL apuntador es: " + apuntadorID);
                     
