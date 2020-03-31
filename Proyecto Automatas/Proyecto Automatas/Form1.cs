@@ -148,22 +148,21 @@ namespace Proyecto_Automatas
                     {
 
                         txtSubcadena.Clear();
-                        if (Cadena[i+1] == '\n')
+
+                        if (Cadena[i + 2] == '\n')
                         {
-                            Espacio = true;
-                            Recorrido(ref apuntadorID, ref Mensaje, ref Espacio);
-                        }
-                        else if (Cadena[i + 2] == '\n')
-                        {
-                            Espacio = true;
-                            Recorrido(ref apuntadorID, ref Mensaje, ref Espacio);
-                            MessageBox.Show("Salto de línea");
-                            txtArchivo.Text = txtArchivo.Text + "\n" + txtToken.Text + "\n";
-                            apuntadorID = 0;
-                            i = i + 2;
-                            renglon++;
-                            txtRenglon.Text = renglon.ToString();
-                            txtToken.Clear();
+                            
+                                Espacio = true;
+                                Recorrido(ref apuntadorID, ref Mensaje, ref Espacio);
+                                MessageBox.Show("Salto de línea");
+                                txtArchivo.Text = txtArchivo.Text + "\n" + txtToken.Text + "\n";
+                                apuntadorID = 0;
+                                i = i + 2;
+                                renglon++;
+                                txtRenglon.Text = renglon.ToString();
+                                txtToken.Clear();
+                            
+                            
                         }
                         else
                         {
@@ -175,6 +174,11 @@ namespace Proyecto_Automatas
                     }
                     catch (Exception E)
                     {
+                        Espacio = true;
+                        //apuntadorID++;
+                        Recorrido(ref apuntadorID, ref Mensaje, ref Espacio);
+                        txtArchivo.Text = txtArchivo.Text + "\n" + txtToken.Text + "\n";
+                        txtToken.Clear();
                         MessageBox.Show("Fin de instrucción");
                     }
                    
