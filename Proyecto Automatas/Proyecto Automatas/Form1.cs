@@ -23,8 +23,8 @@ namespace Proyecto_Automatas
         /*static string cadenaConexion = "server=" + servidor + "; port=" + puerto + "; user id=" + usuario +
                  "; password=" + contrasena;*/
 
-        static string cadenaConexion = "server=" + servidor + "; port=" + puerto+"; Database=bdJace" + "; user id=" + usuario +
-                "; password=" + contrasena;
+        static string cadenaConexion = "SERVER=" + servidor + "; PORT=" + puerto+";Database=bdJace" + ";UID=" + usuario +
+                ";PASSWORD=" + contrasena + ";";
         #endregion
 
         #region RELLENO QUE NO SIRVE
@@ -41,30 +41,62 @@ namespace Proyecto_Automatas
 
         private void btnConectar_Click(object sender, EventArgs e)
         {
+
+            MySqlConnection miconexion = new MySqlConnection(cadenaConexion);
+
             //string Cadena;
 
             //txtFrase.Text = txtFrase.Text.Trim();
             //Cadena = txtFrase.Text;
             //MessageBox.Show(Cadena.Length.ToString());
-            /*try
-            {
-                conexionBD.Open();
 
-                MySqlDataReader reader = null;
-                MySqlCommand cmd = new MySqlCommand("SHOW DATABASES", conexionBD);
-                reader = cmd.ExecuteReader();
 
-                while (reader.Read())
-                {
-                    datos += reader.GetString(0) + "\n";
-                }
-            }
-            catch (MySqlException ex)
+            //try
+            //{
+            //    miconexion.Open();
+            //    string sql = "select * from Matriz";
+            //    MySqlDataReader reader = null;
+            //    MySqlCommand cmd = new MySqlCommand(sql, miconexion);
+            //    reader = cmd.ExecuteReader();
+
+            //    using(MySqlDataReader rdr = cmd.ExecuteReader())
+            //    {
+
+            //        while (rdr.Read())
+            //        {
+            //            /* se supone que leera con estoxd */
+            //        }
+            //    }
+
+            //    //while (reader.Read())
+            //    //{
+            //    //    datos += reader.GetString(0) + "\n";
+            //    //}
+            //}
+            //catch (MySqlException ex)
+            //{
+            //    MessageBox.Show(ex.ToString());
+            //}
+
+
+            //MessageBox.Show(datos);
+
+
+
+
+            //esto si sirve pa conectar la bd
+            try
             {
-                MessageBox.Show(ex.ToString());
+                miconexion.Open();
+                MessageBox.Show("conexión abierta");
+                miconexion.Close();
+                MessageBox.Show("conexión cerrada");
             }
-            MessageBox.Show(datos);
-            */
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+            //aqui termina la conexion
 
         }
 
