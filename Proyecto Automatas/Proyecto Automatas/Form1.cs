@@ -10,10 +10,24 @@ using System.Threading.Tasks;
 using System.Windows.Forms; 
 
 
+
 namespace Proyecto_Automatas
 {
     public partial class Form1 : Form
     {
+        #region PARAMETROS CONEXION 
+        static string servidor = "107.180.51.242";
+        static string puerto = "3306";
+        static string usuario = "Javier";
+        static string contrasena = "17100199";
+        /*static string cadenaConexion = "server=" + servidor + "; port=" + puerto + "; user id=" + usuario +
+                 "; password=" + contrasena;*/
+
+        static string cadenaConexion = "server=" + servidor + "; port=" + puerto+"; Database=bdJace" + "; user id=" + usuario +
+                "; password=" + contrasena;
+        #endregion
+
+        #region RELLENO QUE NO SIRVE
         public Form1()
         {
             InitializeComponent();
@@ -27,27 +41,12 @@ namespace Proyecto_Automatas
 
         private void btnConectar_Click(object sender, EventArgs e)
         {
-            string Cadena;
+            //string Cadena;
 
-            txtFrase.Text = txtFrase.Text.Trim();
-            Cadena = txtFrase.Text;
+            //txtFrase.Text = txtFrase.Text.Trim();
+            //Cadena = txtFrase.Text;
             //MessageBox.Show(Cadena.Length.ToString());
-
-            string servidor = "107.180.51.242";
-            string puerto = "3306";
-            string usuario = "Javier";
-            string contrasena = "17100199";
-            string datos = "";
-
-            /*string cadenaConexion = "server=" + servidor + "; port=" + puerto + "; user id=" + usuario + 
-                "; password=" + contrasena + "; database=dbJace;";
-            */
-
-            string cadenaConexion = "server=" + servidor + "; port=" + puerto + "; user id=" + usuario +
-                "; password=" + contrasena;
-            MySqlConnection conexionBD = new MySqlConnection(cadenaConexion);
-
-            try
+            /*try
             {
                 conexionBD.Open();
 
@@ -65,7 +64,7 @@ namespace Proyecto_Automatas
                 MessageBox.Show(ex.ToString());
             }
             MessageBox.Show(datos);
-
+            */
 
         }
 
@@ -76,55 +75,151 @@ namespace Proyecto_Automatas
 
         private void button1_Click(object sender, EventArgs e)
         {
-            //NO SIRVE EL TRIM :(
-            string Cadena = txtFrase.Text.Trim();
 
-            for(int i=0; i<Cadena.Length; i++)
+        }
+
+        #endregion
+
+
+        //AQUI SUCEDE LA MAGIA :)
+        private void btnIniciar_Click(object sender, EventArgs e)
+        {
+            //SIRVEN PARA LA CONEXION
+            MySqlConnection conexionBD = new MySqlConnection(cadenaConexion);
+            MySqlDataAdapter da;
+            DataSet ds;
+            string query;
+
+
+            string Cadena = txtFrase.Text.Trim();
+            string Mensaje;
+            int apuntadorID = 0;
+            bool Espacio = false;
+
+            for (int i = 0; i < Cadena.Length; i++)
             {
                 //Muestra el recorrido del textBox
                 MessageBox.Show(Cadena[i].ToString());
+                Mensaje = Cadena[i].ToString();
+                txtSubcadena.Text = txtSubcadena.Text + Mensaje;
+
                 if (Cadena[i] == ' ')
                 {
+                    //DETECTA SI HAY UN ESPACIO
                     MessageBox.Show("Aqui hay un espacio");
-                }
-            }
-        }
+                    Espacio = true;
+                    MessageBox.Show(Espacio.ToString());
+                    //apuntadorID++;
+                    Recorrido(ref apuntadorID, ref Mensaje, ref Espacio);
 
-        private void btnIniciar_Click(object sender, EventArgs e)
-        {
-            string Cadena = txtFrase.Text.Trim();
-
-            //CICLO DE RECORRIDO
-            for (int i = 0; i < Cadena.Length; i++)
-            {
-                if (Cadena[i] == ' ')
-                {
-                    MessageBox.Show("ESPACIO");
-                    txtArchivo.Text = txtArchivo.Text + Cadena[i].ToString();
-
-                    txtSubcadena.Text = "";
                 }
                 else
                 {
-                    MessageBox.Show(Cadena[i].ToString());
+                    Recorrido(ref apuntadorID, ref Mensaje, ref Espacio);
+                    /*query = "SELECT Z" + Cadena[i] + " FROM Matriz where ID=" + apuntadorID.ToString() + " ;";
+                    da = new MySqlDataAdapter(query, conexionBD);
+                    ds = new DataSet();
+                    da.Fill(ds);
+                    conexionBD.Close();
 
-                    //MUESTRA el el recorrido en textBox
-                    txtSubcadena.Text = txtSubcadena.Text + Cadena[i].ToString();
+                    if (ds.Tables[0].Rows.Count != 0)
+                    {
+                        dataGridView1.DataSource = ds.Tables[0];
+
+                        //OBTIENE EL VALOR DEL APUNTADOR
+                        apuntadorID = int.Parse(dataGridView1.Rows[0].Cells[0].Value.ToString());
+                        MessageBox.Show("EL apuntador es: " + apuntadorID);
+                    }*/
                 }
 
-                /*
-                //Muestra el recorrido del textBox
-                MessageBox.Show(Cadena[i].ToString());
-
-                txtSubcadena.Text = txtSubcadena.Text + Cadena[i].ToString();
-                if (Cadena[i] == ' ')
-                {
-                    MessageBox.Show("Aqui hay un espacio");
-                }
-                */
             }
         }
 
-       
+        public void Recorrido(ref int apuntadorID, ref string Cadena,ref bool Espacio)
+        {
+            MySqlConnection conexionBD = new MySqlConnection(cadenaConexion);
+            MySqlDataAdapter da;
+            DataSet ds;
+            string query;
+            bool Entra = false;
+            string Token = "";
+
+            if(Espacio)
+            {
+                Entra = true;
+                query = "SELECT DEL FROM Matriz where ID=" + apuntadorID.ToString() + " ;";
+                da = new MySqlDataAdapter(query, conexionBD);
+                ds = new DataSet();
+                da.Fill(ds);
+                conexionBD.Close();
+
+                if (ds.Tables[0].Rows.Count != 0)
+                {
+                    dataGridView1.DataSource = ds.Tables[0];
+
+                    //OBTIENE EL VALOR DEL APUNTADOR
+                    apuntadorID = int.Parse(dataGridView1.Rows[0].Cells[0].Value.ToString());
+                    MessageBox.Show("EL apuntador es: " + apuntadorID);
+                }
+
+            }
+            else
+            {
+                MessageBox.Show("La cadena es igual a :" + Cadena);
+                query = "SELECT Z" + Cadena + " FROM Matriz where ID=" + apuntadorID.ToString() + " ;";
+                da = new MySqlDataAdapter(query, conexionBD);
+                ds = new DataSet();
+                da.Fill(ds);
+                conexionBD.Close();
+
+                if (ds.Tables[0].Rows.Count != 0)
+                {
+                    dataGridView1.DataSource = ds.Tables[0];
+
+                    //OBTIENE EL VALOR DEL APUNTADOR
+                    apuntadorID = int.Parse(dataGridView1.Rows[0].Cells[0].Value.ToString());
+                    MessageBox.Show("EL apuntador es: " + apuntadorID);
+                }
+            }
+
+           
+            if(Entra)
+            {
+                query = "SELECT TOKEN" + Cadena + " FROM Matriz where ID=" + apuntadorID.ToString() + " ;";
+                da = new MySqlDataAdapter(query, conexionBD);
+                ds = new DataSet();
+                da.Fill(ds);
+                conexionBD.Close();
+
+                if (ds.Tables[0].Rows.Count != 0)
+                {
+                    dataGridView1.DataSource = ds.Tables[0];
+
+                    //OBTIENE EL VALOR DEL APUNTADOR
+                    Token = (dataGridView1.Rows[0].Cells[0].Value.ToString());
+                    txtToken.Text = txtToken.Text + Token;
+                    apuntadorID = 0;
+                    MessageBox.Show("EL apuntador es: " + apuntadorID);
+                    
+                }
+                /*da = new MySqlDataAdapter(query, conexionBD);
+                ds = new DataSet();
+                da.Fill(ds);
+                conexionBD.Close();
+
+                if (ds.Tables[0].Rows.Count != 0)
+                {
+                    dataGridView1.DataSource = ds.Tables[0];
+
+                    //OBTIENE EL VALOR DEL APUNTADOR
+                    Token = dataGridView1.Rows[0].Cells[0].Value.ToString();
+                    apuntadorID = 0;
+                    MessageBox.Show("EL apuntador es: " + apuntadorID+ "\n Y el token es:"+Token);
+                }
+                */
+                Entra = false;
+                Espacio = false;
+            }
+        }
     }
 }

@@ -40,11 +40,13 @@
             this.btnIniciar = new System.Windows.Forms.Button();
             this.label4 = new System.Windows.Forms.Label();
             this.textBox3 = new System.Windows.Forms.TextBox();
+            this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
             // btnConectar
             // 
-            this.btnConectar.Location = new System.Drawing.Point(531, 120);
+            this.btnConectar.Location = new System.Drawing.Point(364, 57);
             this.btnConectar.Name = "btnConectar";
             this.btnConectar.Size = new System.Drawing.Size(167, 23);
             this.btnConectar.TabIndex = 0;
@@ -59,7 +61,7 @@
             this.txtFrase.Name = "txtFrase";
             this.txtFrase.Size = new System.Drawing.Size(159, 103);
             this.txtFrase.TabIndex = 1;
-            this.txtFrase.Text = "SI (x>10) ENTONCES\r\nESCRIBE \"MAYOR\"\r\nSINO\r\nESCRIBE \"MENOR\"\r\nFINSI";
+            this.txtFrase.Text = "SI ( x > 10 ) ENTONCES \r\nESCRIBE \"MAYOR\" \r\nSINO \r\nESCRIBE \"MENOR\" \r\nFINSI ";
             // 
             // button1
             // 
@@ -146,11 +148,20 @@
             this.textBox3.Size = new System.Drawing.Size(100, 20);
             this.textBox3.TabIndex = 11;
             // 
+            // dataGridView1
+            // 
+            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView1.Location = new System.Drawing.Point(354, 223);
+            this.dataGridView1.Name = "dataGridView1";
+            this.dataGridView1.Size = new System.Drawing.Size(240, 150);
+            this.dataGridView1.TabIndex = 12;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.dataGridView1);
             this.Controls.Add(this.textBox3);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.btnIniciar);
@@ -166,6 +177,7 @@
             this.Name = "Form1";
             this.Text = "Form1";
             this.Load += new System.EventHandler(this.Form1_Load);
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -185,6 +197,7 @@
         private System.Windows.Forms.Button btnIniciar;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.TextBox textBox3;
+        private System.Windows.Forms.DataGridView dataGridView1;
     }
 }
 
