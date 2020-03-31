@@ -39,7 +39,7 @@
             this.txtArchivo = new System.Windows.Forms.TextBox();
             this.btnIniciar = new System.Windows.Forms.Button();
             this.label4 = new System.Windows.Forms.Label();
-            this.textBox3 = new System.Windows.Forms.TextBox();
+            this.txtRenglon = new System.Windows.Forms.TextBox();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
@@ -91,7 +91,7 @@
             this.txtSubcadena.Location = new System.Drawing.Point(18, 254);
             this.txtSubcadena.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.txtSubcadena.Name = "txtSubcadena";
-            this.txtSubcadena.Size = new System.Drawing.Size(236, 26);
+            this.txtSubcadena.Size = new System.Drawing.Size(511, 26);
             this.txtSubcadena.TabIndex = 4;
             // 
             // txtToken
@@ -99,7 +99,7 @@
             this.txtToken.Location = new System.Drawing.Point(18, 343);
             this.txtToken.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.txtToken.Name = "txtToken";
-            this.txtToken.Size = new System.Drawing.Size(148, 26);
+            this.txtToken.Size = new System.Drawing.Size(511, 26);
             this.txtToken.TabIndex = 5;
             // 
             // label2
@@ -128,7 +128,7 @@
             this.txtArchivo.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.txtArchivo.Multiline = true;
             this.txtArchivo.Name = "txtArchivo";
-            this.txtArchivo.Size = new System.Drawing.Size(148, 178);
+            this.txtArchivo.Size = new System.Drawing.Size(364, 178);
             this.txtArchivo.TabIndex = 8;
             // 
             // btnIniciar
@@ -152,18 +152,19 @@
             this.label4.TabIndex = 10;
             this.label4.Text = "Numero de Renglon";
             // 
-            // textBox3
+            // txtRenglon
             // 
-            this.textBox3.Location = new System.Drawing.Point(270, 48);
-            this.textBox3.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.textBox3.Name = "textBox3";
-            this.textBox3.Size = new System.Drawing.Size(148, 26);
-            this.textBox3.TabIndex = 11;
+            this.txtRenglon.Location = new System.Drawing.Point(270, 48);
+            this.txtRenglon.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.txtRenglon.Name = "txtRenglon";
+            this.txtRenglon.Size = new System.Drawing.Size(148, 26);
+            this.txtRenglon.TabIndex = 11;
+            this.txtRenglon.Text = "1";
             // 
             // dataGridView1
             // 
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Location = new System.Drawing.Point(531, 343);
+            this.dataGridView1.Location = new System.Drawing.Point(517, 414);
             this.dataGridView1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.RowHeadersWidth = 62;
@@ -176,7 +177,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1200, 692);
             this.Controls.Add(this.dataGridView1);
-            this.Controls.Add(this.textBox3);
+            this.Controls.Add(this.txtRenglon);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.btnIniciar);
             this.Controls.Add(this.txtArchivo);
@@ -211,7 +212,7 @@
         private System.Windows.Forms.TextBox txtArchivo;
         private System.Windows.Forms.Button btnIniciar;
         private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.TextBox textBox3;
+        private System.Windows.Forms.TextBox txtRenglon;
         private System.Windows.Forms.DataGridView dataGridView1;
     }
 }
