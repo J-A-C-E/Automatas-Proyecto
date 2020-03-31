@@ -25,6 +25,8 @@ namespace Proyecto_Automatas
 
         static string cadenaConexion = "SERVER=" + servidor + "; PORT=" + puerto+";Database=bdJace" + ";UID=" + usuario +
                 ";PASSWORD=" + contrasena + ";";
+
+        MySqlConnection miconexion = new MySqlConnection(cadenaConexion);
         #endregion
 
         #region RELLENO QUE NO SIRVE
@@ -42,7 +44,6 @@ namespace Proyecto_Automatas
         private void btnConectar_Click(object sender, EventArgs e)
         {
 
-            MySqlConnection miconexion = new MySqlConnection(cadenaConexion);
 
             //string Cadena;
 
@@ -148,7 +149,7 @@ namespace Proyecto_Automatas
                 else
                 {
                     Recorrido(ref apuntadorID, ref Mensaje, ref Espacio);
-                    /*query = "SELECT Z" + Cadena[i] + " FROM Matriz where ID=" + apuntadorID.ToString() + " ;";
+                    /*query = "SELECT `Z" + Cadena[i] + "` FROM Matriz where ID=" + apuntadorID.ToString() + " ;";
                     da = new MySqlDataAdapter(query, conexionBD);
                     ds = new DataSet();
                     da.Fill(ds);
@@ -198,7 +199,7 @@ namespace Proyecto_Automatas
             else
             {
                 MessageBox.Show("La cadena es igual a :" + Cadena);
-                query = "SELECT Z" + Cadena + " FROM Matriz where ID=" + apuntadorID.ToString() + " ;";
+                query = "SELECT `Z" + Cadena + "` FROM Matriz where ID=" + apuntadorID.ToString() + " ;";
                 da = new MySqlDataAdapter(query, conexionBD);
                 ds = new DataSet();
                 da.Fill(ds);
