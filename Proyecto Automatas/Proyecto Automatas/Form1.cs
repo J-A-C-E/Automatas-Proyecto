@@ -7,7 +7,9 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.Windows.Forms; 
+using System.Windows.Forms;
+using System.IO;
+using System.Text;
 
 
 
@@ -23,13 +25,15 @@ namespace Proyecto_Automatas
         /*static string cadenaConexion = "server=" + servidor + "; port=" + puerto + "; user id=" + usuario +
                  "; password=" + contrasena;*/
 
-        static string cadenaConexion = "SERVER=" + servidor + "; PORT=" + puerto+";Database=bdJace" + ";UID=" + usuario +
+        static string cadenaConexion = "SERVER=" + servidor + "; PORT=" + puerto + ";Database=bdJace" + ";UID=" + usuario +
                 ";PASSWORD=" + contrasena + ";";
 
         MySqlConnection miconexion = new MySqlConnection(cadenaConexion);
         #endregion
 
         #region RELLENO QUE NO SIRVE
+
+        string ubicacion = @"c:\Archivo\";
         public Form1()
         {
             InitializeComponent();
@@ -103,6 +107,19 @@ namespace Proyecto_Automatas
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            
+            string[] filePaths = Directory.GetFiles(@"c:\Archivo\");
+
+            int i;
+
+                for (i = 0; i < filePaths.Length; i++)
+                {
+                   cmbArchivo.Items.Add (filePaths[i].ToString());
+                }
+                
+            
+            
+
 
         }
 
@@ -127,7 +144,7 @@ namespace Proyecto_Automatas
             MySqlDataAdapter da;
             DataSet ds;
             string query;
-            int renglon = 1 ;
+            int renglon = 1;
 
 
             string Cadena = txtFrase.Text;
@@ -141,7 +158,7 @@ namespace Proyecto_Automatas
                 MessageBox.Show(Cadena[i].ToString());
                 Mensaje = Cadena[i].ToString();
                 txtSubcadena.Text = txtSubcadena.Text + Mensaje;
-                
+
                 if (Cadena[i] == ' ')
                 {
                     try
@@ -151,18 +168,18 @@ namespace Proyecto_Automatas
 
                         if (Cadena[i + 2] == '\n')
                         {
-                            
-                                Espacio = true;
-                                Recorrido(ref apuntadorID, ref Mensaje, ref Espacio);
-                                MessageBox.Show("Salto de línea");
-                                txtArchivo.Text = txtArchivo.Text + "\n" + txtToken.Text + "\n";
-                                apuntadorID = 0;
-                                i = i + 2;
-                                renglon++;
-                                txtRenglon.Text = renglon.ToString();
-                                txtToken.Clear();
-                            
-                            
+
+                            Espacio = true;
+                            Recorrido(ref apuntadorID, ref Mensaje, ref Espacio);
+                            MessageBox.Show("Salto de línea");
+                            txtArchivo.Text = txtArchivo.Text + "\n" + txtToken.Text + "\n";
+                            apuntadorID = 0;
+                            i = i + 2;
+                            renglon++;
+                            txtRenglon.Text = renglon.ToString();
+                            txtToken.Clear();
+
+
                         }
                         else
                         {
@@ -181,7 +198,7 @@ namespace Proyecto_Automatas
                         txtToken.Clear();
                         MessageBox.Show("Fin de instrucción");
                     }
-                   
+
 
                 }
                 else
@@ -206,7 +223,7 @@ namespace Proyecto_Automatas
             }
         }
 
-        public void Recorrido(ref int apuntadorID, ref string Cadena,ref bool Espacio)
+        public void Recorrido(ref int apuntadorID, ref string Cadena, ref bool Espacio)
         {
             MySqlConnection conexionBD = new MySqlConnection(cadenaConexion);
             MySqlDataAdapter da;
@@ -215,7 +232,7 @@ namespace Proyecto_Automatas
             bool Entra = false;
             string Token = "";
 
-            if(Espacio)
+            if (Espacio)
             {
 
                 Entra = true;
@@ -237,7 +254,7 @@ namespace Proyecto_Automatas
             }
             else if (Cadena == " ")
             {
-               
+
             }
             else
             {
@@ -257,8 +274,8 @@ namespace Proyecto_Automatas
                 }
             }
 
-           
-            if(Entra)
+
+            if (Entra)
             {
                 query = "SELECT TOKEN" + Cadena + " FROM Matriz where ID=" + apuntadorID.ToString() + " ;";
                 da = new MySqlDataAdapter(query, conexionBD);
@@ -275,7 +292,7 @@ namespace Proyecto_Automatas
                     txtToken.Text = txtToken.Text + Token + " ";
                     apuntadorID = 0;
                     MessageBox.Show("EL apuntador es: " + apuntadorID);
-                    
+
                 }
                 /*da = new MySqlDataAdapter(query, conexionBD);
                 ds = new DataSet();
@@ -296,5 +313,24 @@ namespace Proyecto_Automatas
                 Espacio = false;
             }
         }
+
+        private void btnArchivo_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                string text = System.IO.File.ReadAllText(@""+cmbArchivo.Text);
+                txtFrase.Text = text;
+            }
+            catch (Exception E)
+            {
+                MessageBox.Show(E.Message);
+               
+            }
+
+
+
+        }
+
     }
 }
+

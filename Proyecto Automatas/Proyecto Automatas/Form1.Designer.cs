@@ -41,12 +41,17 @@
             this.label4 = new System.Windows.Forms.Label();
             this.txtRenglon = new System.Windows.Forms.TextBox();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.label5 = new System.Windows.Forms.Label();
+            this.btnArchivo = new System.Windows.Forms.Button();
+            this.cmbArchivo = new System.Windows.Forms.ComboBox();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+            this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
             // btnConectar
             // 
-            this.btnConectar.Location = new System.Drawing.Point(546, 88);
+            this.btnConectar.Location = new System.Drawing.Point(927, 14);
             this.btnConectar.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.btnConectar.Name = "btnConectar";
             this.btnConectar.Size = new System.Drawing.Size(250, 35);
@@ -57,7 +62,7 @@
             // 
             // txtFrase
             // 
-            this.txtFrase.Location = new System.Drawing.Point(18, 18);
+            this.txtFrase.Location = new System.Drawing.Point(293, 65);
             this.txtFrase.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.txtFrase.Multiline = true;
             this.txtFrase.Name = "txtFrase";
@@ -67,7 +72,7 @@
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(531, 214);
+            this.button1.Location = new System.Drawing.Point(1065, 59);
             this.button1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(112, 35);
@@ -79,7 +84,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(14, 229);
+            this.label1.Location = new System.Drawing.Point(14, 281);
             this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(161, 20);
@@ -88,7 +93,7 @@
             // 
             // txtSubcadena
             // 
-            this.txtSubcadena.Location = new System.Drawing.Point(18, 254);
+            this.txtSubcadena.Location = new System.Drawing.Point(18, 306);
             this.txtSubcadena.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.txtSubcadena.Name = "txtSubcadena";
             this.txtSubcadena.Size = new System.Drawing.Size(511, 26);
@@ -96,7 +101,7 @@
             // 
             // txtToken
             // 
-            this.txtToken.Location = new System.Drawing.Point(18, 343);
+            this.txtToken.Location = new System.Drawing.Point(18, 378);
             this.txtToken.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.txtToken.Name = "txtToken";
             this.txtToken.Size = new System.Drawing.Size(511, 26);
@@ -105,7 +110,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(14, 318);
+            this.label2.Location = new System.Drawing.Point(14, 353);
             this.label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(53, 20);
@@ -133,7 +138,7 @@
             // 
             // btnIniciar
             // 
-            this.btnIniciar.Location = new System.Drawing.Point(270, 88);
+            this.btnIniciar.Location = new System.Drawing.Point(537, 133);
             this.btnIniciar.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.btnIniciar.Name = "btnIniciar";
             this.btnIniciar.Size = new System.Drawing.Size(112, 35);
@@ -145,7 +150,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(266, 23);
+            this.label4.Location = new System.Drawing.Point(533, 68);
             this.label4.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(151, 20);
@@ -154,7 +159,7 @@
             // 
             // txtRenglon
             // 
-            this.txtRenglon.Location = new System.Drawing.Point(270, 48);
+            this.txtRenglon.Location = new System.Drawing.Point(537, 93);
             this.txtRenglon.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.txtRenglon.Name = "txtRenglon";
             this.txtRenglon.Size = new System.Drawing.Size(148, 26);
@@ -164,18 +169,59 @@
             // dataGridView1
             // 
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Location = new System.Drawing.Point(517, 414);
+            this.dataGridView1.Location = new System.Drawing.Point(551, 281);
             this.dataGridView1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.RowHeadersWidth = 62;
-            this.dataGridView1.Size = new System.Drawing.Size(360, 231);
+            this.dataGridView1.Size = new System.Drawing.Size(235, 153);
             this.dataGridView1.TabIndex = 12;
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(5, 54);
+            this.label5.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(234, 20);
+            this.label5.TabIndex = 13;
+            this.label5.Text = "Cargar Archivo de Instrucciones";
+            // 
+            // btnArchivo
+            // 
+            this.btnArchivo.Location = new System.Drawing.Point(22, 189);
+            this.btnArchivo.Name = "btnArchivo";
+            this.btnArchivo.Size = new System.Drawing.Size(194, 39);
+            this.btnArchivo.TabIndex = 14;
+            this.btnArchivo.Text = "Cargar Archivo";
+            this.btnArchivo.UseVisualStyleBackColor = true;
+            this.btnArchivo.Click += new System.EventHandler(this.btnArchivo_Click);
+            // 
+            // cmbArchivo
+            // 
+            this.cmbArchivo.FormattingEnabled = true;
+            this.cmbArchivo.Location = new System.Drawing.Point(22, 135);
+            this.cmbArchivo.Name = "cmbArchivo";
+            this.cmbArchivo.Size = new System.Drawing.Size(194, 28);
+            this.cmbArchivo.TabIndex = 15;
+            // 
+            // groupBox1
+            // 
+            this.groupBox1.Controls.Add(this.btnArchivo);
+            this.groupBox1.Controls.Add(this.label5);
+            this.groupBox1.Controls.Add(this.cmbArchivo);
+            this.groupBox1.Location = new System.Drawing.Point(18, 14);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(246, 245);
+            this.groupBox1.TabIndex = 16;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "groupBox1";
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1200, 692);
+            this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.dataGridView1);
             this.Controls.Add(this.txtRenglon);
             this.Controls.Add(this.label4);
@@ -194,6 +240,8 @@
             this.Text = "Form1";
             this.Load += new System.EventHandler(this.Form1_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
+            this.groupBox1.ResumeLayout(false);
+            this.groupBox1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -214,6 +262,10 @@
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.TextBox txtRenglon;
         private System.Windows.Forms.DataGridView dataGridView1;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Button btnArchivo;
+        private System.Windows.Forms.ComboBox cmbArchivo;
+        private System.Windows.Forms.GroupBox groupBox1;
     }
 }
 
