@@ -172,7 +172,7 @@ namespace Proyecto_Automatas
                             Espacio = true;
                             Recorrido(ref apuntadorID, ref Mensaje, ref Espacio);
                             MessageBox.Show("Salto de línea");
-                            txtArchivo.Text = txtArchivo.Text + "\n" + txtToken.Text + "\n";
+                            txtArchivo.Text = txtArchivo.Text + txtToken.Text + "\r\n";
                             apuntadorID = 0;
                             i = i + 2;
                             renglon++;
@@ -194,9 +194,10 @@ namespace Proyecto_Automatas
                         Espacio = true;
                         //apuntadorID++;
                         Recorrido(ref apuntadorID, ref Mensaje, ref Espacio);
-                        txtArchivo.Text = txtArchivo.Text + "\n" + txtToken.Text + "\n";
+                        txtArchivo.Text = txtArchivo.Text + txtToken.Text + "\r\n";
                         txtToken.Clear();
                         MessageBox.Show("Fin de instrucción");
+                        txtRenglon.Text = "1";
                     }
 
 
@@ -331,6 +332,10 @@ namespace Proyecto_Automatas
 
         }
 
+        private void button2_Click(object sender, EventArgs e)
+        {
+            txtArchivo.Clear();
+        }
     }
 }
 
