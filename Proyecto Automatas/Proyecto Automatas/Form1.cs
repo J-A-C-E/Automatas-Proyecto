@@ -159,7 +159,15 @@ namespace Proyecto_Automatas
                 Mensaje = Cadena[i].ToString();
                 txtSubcadena.Text = txtSubcadena.Text + Mensaje;
 
-                if (Cadena[i] == ' ')
+                if (Cadena[i] == '#')
+                {
+                    Instruccion = Instruccion + Cadena[i].ToString();
+                    Recorrido(ref apuntadorID, ref Mensaje, ref Espacio);
+                    Sostenido = true;
+                }
+
+
+                else if (Cadena[i] == ' ')
                 {
                     try
                     {
@@ -204,25 +212,16 @@ namespace Proyecto_Automatas
                 }
                 else
                 {
+                    
                     Recorrido(ref apuntadorID, ref Mensaje, ref Espacio);
-                    /*query = "SELECT `Z" + Cadena[i] + "` FROM Matriz where ID=" + apuntadorID.ToString() + " ;";
-                    da = new MySqlDataAdapter(query, conexionBD);
-                    ds = new DataSet();
-                    da.Fill(ds);
-                    conexionBD.Close();
-
-                    if (ds.Tables[0].Rows.Count != 0)
-                    {
-                        dataGridView1.DataSource = ds.Tables[0];
-
-                        //OBTIENE EL VALOR DEL APUNTADOR
-                        apuntadorID = int.Parse(dataGridView1.Rows[0].Cells[0].Value.ToString());
-                        MessageBox.Show("EL apuntador es: " + apuntadorID);
-                    }*/
+                    
                 }
 
             }
         }
+
+        bool Sostenido = false;
+        int Contador = 1;
 
         public void Recorrido(ref int apuntadorID, ref string Cadena, ref bool Espacio)
         {
@@ -259,6 +258,11 @@ namespace Proyecto_Automatas
             }
             else
             {
+                if(Sostenido)
+                {
+                    Cadena = "LET";
+                }
+
                 query = "SELECT `Z" + Cadena + "` FROM Matriz where ID=" + apuntadorID.ToString() + " ;";
                 da = new MySqlDataAdapter(query, conexionBD);
                 ds = new DataSet();
@@ -290,29 +294,35 @@ namespace Proyecto_Automatas
 
                     //OBTIENE EL VALOR DEL APUNTADOR
                     Token = (dataGridView1.Rows[0].Cells[0].Value.ToString());
+
+                    if(Token=="IDE")
+                    {
+                        //METODO
+                    }
+
                     txtToken.Text = txtToken.Text + Token + " ";
                     apuntadorID = 0;
                     MessageBox.Show("EL apuntador es: " + apuntadorID);
 
                 }
-                /*da = new MySqlDataAdapter(query, conexionBD);
-                ds = new DataSet();
-                da.Fill(ds);
-                conexionBD.Close();
-
-                if (ds.Tables[0].Rows.Count != 0)
-                {
-                    dataGridView1.DataSource = ds.Tables[0];
-
-                    //OBTIENE EL VALOR DEL APUNTADOR
-                    Token = dataGridView1.Rows[0].Cells[0].Value.ToString();
-                    apuntadorID = 0;
-                    MessageBox.Show("EL apuntador es: " + apuntadorID+ "\n Y el token es:"+Token);
-                }
-                */
+           
                 Entra = false;
                 Espacio = false;
+                Sostenido = false;
             }
+        }
+
+        string Instruccion = "";
+        public void BuscarTokenIde()
+        {
+            MySqlConnection conexionBD = new MySqlConnection(cadenaConexion);
+            MySqlDataAdapter da;
+            DataSet ds;
+            string query;
+            string Token = "";
+            
+
+
         }
 
         private void btnArchivo_Click(object sender, EventArgs e)
