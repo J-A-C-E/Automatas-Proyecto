@@ -46,13 +46,20 @@
             this.cmbArchivo = new System.Windows.Forms.ComboBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.button2 = new System.Windows.Forms.Button();
+            this.dgvIdentificador = new System.Windows.Forms.DataGridView();
+            this.dgvConstantes = new System.Windows.Forms.DataGridView();
+            this.label6 = new System.Windows.Forms.Label();
+            this.label7 = new System.Windows.Forms.Label();
+            this.button3 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.groupBox1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvIdentificador)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvConstantes)).BeginInit();
             this.SuspendLayout();
             // 
             // btnConectar
             // 
-            this.btnConectar.Location = new System.Drawing.Point(927, 14);
+            this.btnConectar.Location = new System.Drawing.Point(18, 626);
             this.btnConectar.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.btnConectar.Name = "btnConectar";
             this.btnConectar.Size = new System.Drawing.Size(250, 35);
@@ -73,7 +80,7 @@
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(1065, 59);
+            this.button1.Location = new System.Drawing.Point(18, 671);
             this.button1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(112, 35);
@@ -229,11 +236,66 @@
             this.button2.UseVisualStyleBackColor = true;
             this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
+            // dgvIdentificador
+            // 
+            this.dgvIdentificador.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvIdentificador.Location = new System.Drawing.Point(804, 42);
+            this.dgvIdentificador.Name = "dgvIdentificador";
+            this.dgvIdentificador.RowHeadersWidth = 62;
+            this.dgvIdentificador.RowTemplate.Height = 28;
+            this.dgvIdentificador.Size = new System.Drawing.Size(363, 430);
+            this.dgvIdentificador.TabIndex = 19;
+            // 
+            // dgvConstantes
+            // 
+            this.dgvConstantes.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvConstantes.Location = new System.Drawing.Point(1173, 43);
+            this.dgvConstantes.Name = "dgvConstantes";
+            this.dgvConstantes.RowHeadersWidth = 62;
+            this.dgvConstantes.RowTemplate.Height = 28;
+            this.dgvConstantes.Size = new System.Drawing.Size(363, 430);
+            this.dgvConstantes.TabIndex = 20;
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(907, 19);
+            this.label6.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(186, 20);
+            this.label6.TabIndex = 21;
+            this.label6.Text = "Tabla de indentificadores";
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(1274, 20);
+            this.label7.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(156, 20);
+            this.label7.TabIndex = 22;
+            this.label7.Text = "Tabla de Constantes";
+            // 
+            // button3
+            // 
+            this.button3.Location = new System.Drawing.Point(1077, 479);
+            this.button3.Name = "button3";
+            this.button3.Size = new System.Drawing.Size(194, 39);
+            this.button3.TabIndex = 23;
+            this.button3.Text = "Actualizar lista";
+            this.button3.UseVisualStyleBackColor = true;
+            this.button3.Click += new System.EventHandler(this.button3_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1200, 692);
+            this.ClientSize = new System.Drawing.Size(1901, 733);
+            this.Controls.Add(this.button3);
+            this.Controls.Add(this.label7);
+            this.Controls.Add(this.label6);
+            this.Controls.Add(this.dgvConstantes);
+            this.Controls.Add(this.dgvIdentificador);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.dataGridView1);
@@ -256,6 +318,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvIdentificador)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvConstantes)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -281,6 +345,11 @@
         private System.Windows.Forms.ComboBox cmbArchivo;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.DataGridView dgvIdentificador;
+        private System.Windows.Forms.DataGridView dgvConstantes;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.Button button3;
     }
 }
 

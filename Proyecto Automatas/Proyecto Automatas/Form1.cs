@@ -117,10 +117,7 @@ namespace Proyecto_Automatas
                 {
                    cmbArchivo.Items.Add (filePaths[i].ToString());
                 }
-                
-            
-            
-
+            actualizar();
 
         }
 
@@ -514,6 +511,41 @@ namespace Proyecto_Automatas
         {
             txtArchivo.Clear();
         }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            actualizar();
+        }
+        public void actualizar()
+        {
+            MySqlConnection conexionBD = new MySqlConnection(cadenaConexion);
+            MySqlDataAdapter da;
+            DataSet ds;
+            string conecta;
+
+            conecta = "select * from CONSTANTE";
+            da = new MySqlDataAdapter(conecta, conexionBD);
+            ds = new DataSet();
+            da.Fill(ds);
+            conexionBD.Close();
+
+            if (ds.Tables[0].Rows.Count != 0)
+            {
+                dgvConstantes.DataSource = ds.Tables[0];
+            }
+
+            conecta = "select * from IDENTIFICADOR";
+            da = new MySqlDataAdapter(conecta, conexionBD);
+            ds = new DataSet();
+            da.Fill(ds);
+            conexionBD.Close();
+
+            if (ds.Tables[0].Rows.Count != 0)
+            {
+                dgvIdentificador.DataSource = ds.Tables[0];
+            }
+        }
+
     }
 }
 
