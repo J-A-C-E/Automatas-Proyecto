@@ -154,6 +154,12 @@ namespace Proyecto_Automatas
 
             for (int i = 0; i < Cadena.Length; i++)
             {
+
+                if(Sostenido)
+                {
+                    Instruccion = Instruccion + Cadena[i].ToString();
+                    //MessageBox.Show(Instruccion);
+                }
                 //Muestra el recorrido del textBox
                 MessageBox.Show(Cadena[i].ToString());
                 Mensaje = Cadena[i].ToString();
@@ -210,6 +216,7 @@ namespace Proyecto_Automatas
 
 
                 }
+
                 else
                 {
                     
@@ -298,9 +305,14 @@ namespace Proyecto_Automatas
                     if(Token=="IDE")
                     {
                         //METODO
+                        BuscarTokenIde();
+                    }
+                    else
+                    {
+                        txtToken.Text = txtToken.Text + Token + " ";
                     }
 
-                    txtToken.Text = txtToken.Text + Token + " ";
+                    
                     apuntadorID = 0;
                     MessageBox.Show("EL apuntador es: " + apuntadorID);
 
@@ -319,8 +331,68 @@ namespace Proyecto_Automatas
             MySqlDataAdapter da;
             DataSet ds;
             string query;
+            string query2;
+            int queryid;
             string Token = "";
-            
+
+                query = "select TOKEN from IDENTIFICADOR where NOMBRE like '%" + Instruccion +"%'";
+                da = new MySqlDataAdapter(query, conexionBD);
+                ds = new DataSet();
+                da.Fill(ds);
+                conexionBD.Close();
+
+                if (ds.Tables[0].Rows.Count != 0)
+                {
+                    dataGridView1.DataSource = ds.Tables[0];
+                    MessageBox.Show("aLTO");
+                    Token = dataGridView1.Rows[0].Cells[0].Value.ToString();
+                    txtToken.Text = txtToken.Text + Token + " ";
+
+                }
+
+                else
+                {
+                    //aqui tomamos el ultimo id
+                    query2 = "select MAX(ID) from IDENTIFICADOR";
+                    da = new MySqlDataAdapter(query2, conexionBD);
+                    ds = new DataSet();
+                    da.Fill(ds);
+                    conexionBD.Close();
+
+                    if (ds.Tables[0].Rows.Count != 0)
+                    {
+                        dataGridView1.DataSource = ds.Tables[0];
+                        query2 = dataGridView1.Rows[0].Cells[0].Value.ToString();
+                        queryid = Convert.ToInt32(query2) + 1;
+                        query2 = Convert.ToString(queryid);
+                        MessageBox.Show("valor de caca: "+ query2);
+                        
+
+                    }
+                        query = "insert into IDENTIFICADOR (ID, NOMBRE, TOKEN) values (" + query2 +", '" + Instruccion + "', 'IDE" + query2 + "')";
+                        da = new MySqlDataAdapter(query, conexionBD);
+                        ds = new DataSet();
+                        da.Fill(ds);
+                        conexionBD.Close();
+
+                        query = "select TOKEN from IDENTIFICADOR where NOMBRE like '%" + Instruccion + "%'";
+                        da = new MySqlDataAdapter(query, conexionBD);
+                        ds = new DataSet();
+                        da.Fill(ds);
+                        conexionBD.Close();
+
+                        if (ds.Tables[0].Rows.Count != 0)
+                        {
+                            dataGridView1.DataSource = ds.Tables[0];
+                            Token = dataGridView1.Rows[0].Cells[0].Value.ToString();
+                            txtToken.Text = txtToken.Text + Token + " ";
+
+                        }
+                    
+               
+                }
+
+            Instruccion = "";
 
 
         }
