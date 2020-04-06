@@ -239,6 +239,8 @@ namespace Proyecto_Automatas
                 }
 
             }
+            actualizar();
+
         }
 
         bool Sostenido = false;
