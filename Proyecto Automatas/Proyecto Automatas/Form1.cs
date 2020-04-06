@@ -34,6 +34,7 @@ namespace Proyecto_Automatas
         #region RELLENO QUE NO SIRVE
 
         string ubicacion = @"c:\Archivo\";
+        string cadeNum = "";
         public Form1()
         {
             InitializeComponent();
@@ -148,9 +149,12 @@ namespace Proyecto_Automatas
 
 
             string Cadena = txtFrase.Text;
-            string Mensaje;
+            string Mensaje="";
             int apuntadorID = 0;
             bool Espacio = false;
+            int Numeros = 0;
+            
+
 
             for (int i = 0; i < Cadena.Length; i++)
             {
@@ -159,6 +163,19 @@ namespace Proyecto_Automatas
                 {
                     Instruccion = Instruccion + Cadena[i].ToString();
                     //MessageBox.Show(Instruccion);
+                }
+
+                try
+                {
+                    Numeros = int.Parse(Cadena[i].ToString());
+                    cadeNum = cadeNum + Numeros.ToString();
+                    EsNumero = true;
+                    Recorrido(ref apuntadorID, ref Mensaje, ref Espacio);
+
+                }
+                catch(Exception x)
+                {
+                    EsNumero = false;
                 }
                 //Muestra el recorrido del textBox
                 MessageBox.Show(Cadena[i].ToString());
@@ -228,7 +245,7 @@ namespace Proyecto_Automatas
         }
 
         bool Sostenido = false;
-        int Contador = 1;
+        bool EsNumero = false;
 
         public void Recorrido(ref int apuntadorID, ref string Cadena, ref bool Espacio)
         {
@@ -270,6 +287,11 @@ namespace Proyecto_Automatas
                     Cadena = "LET";
                 }
 
+                if (EsNumero)
+                {
+                    Cadena = "1";
+                }
+
                 query = "SELECT `Z" + Cadena + "` FROM Matriz where ID=" + apuntadorID.ToString() + " ;";
                 da = new MySqlDataAdapter(query, conexionBD);
                 ds = new DataSet();
@@ -307,12 +329,17 @@ namespace Proyecto_Automatas
                         //METODO
                         BuscarTokenIde();
                     }
+
+                    else if (Token == "CONE")
+                    {
+                        //METODO
+                        BuscarTokenCONE();
+                    }
                     else
                     {
                         txtToken.Text = txtToken.Text + Token + " ";
                     }
 
-                    
                     apuntadorID = 0;
                     MessageBox.Show("EL apuntador es: " + apuntadorID);
 
@@ -321,6 +348,7 @@ namespace Proyecto_Automatas
                 Entra = false;
                 Espacio = false;
                 Sostenido = false;
+                EsNumero = false;
             }
         }
 
@@ -344,7 +372,6 @@ namespace Proyecto_Automatas
                 if (ds.Tables[0].Rows.Count != 0)
                 {
                     dataGridView1.DataSource = ds.Tables[0];
-                    MessageBox.Show("aLTO");
                     Token = dataGridView1.Rows[0].Cells[0].Value.ToString();
                     txtToken.Text = txtToken.Text + Token + " ";
 
@@ -365,7 +392,6 @@ namespace Proyecto_Automatas
                         query2 = dataGridView1.Rows[0].Cells[0].Value.ToString();
                         queryid = Convert.ToInt32(query2) + 1;
                         query2 = Convert.ToString(queryid);
-                        MessageBox.Show("valor de caca: "+ query2);
                         
 
                     }
@@ -393,6 +419,76 @@ namespace Proyecto_Automatas
                 }
 
             Instruccion = "";
+
+
+        }
+
+        public void BuscarTokenCONE()
+        {
+            MySqlConnection conexionBD = new MySqlConnection(cadenaConexion);
+            MySqlDataAdapter da;
+            DataSet ds;
+            string query;
+            string query2;
+            int queryid;
+            string Token = "";
+
+            query = "select TOKEN from CONSTANTE where NOMBRE like '%" + cadeNum + "%'";
+            da = new MySqlDataAdapter(query, conexionBD);
+            ds = new DataSet();
+            da.Fill(ds);
+            conexionBD.Close();
+
+            if (ds.Tables[0].Rows.Count != 0)
+            {
+                dataGridView1.DataSource = ds.Tables[0];
+                Token = dataGridView1.Rows[0].Cells[0].Value.ToString();
+                txtToken.Text = txtToken.Text + Token + " ";
+
+            }
+
+            else
+            {
+                //aqui tomamos el ultimo id
+                query2 = "select MAX(ID) from CONSTANTE";
+                da = new MySqlDataAdapter(query2, conexionBD);
+                ds = new DataSet();
+                da.Fill(ds);
+                conexionBD.Close();
+
+                if (ds.Tables[0].Rows.Count != 0)
+                {
+                    dataGridView1.DataSource = ds.Tables[0];
+                    query2 = dataGridView1.Rows[0].Cells[0].Value.ToString();
+                    queryid = Convert.ToInt32(query2) + 1;
+                    query2 = Convert.ToString(queryid);
+
+
+                }
+                query = "insert into CONSTANTE (ID, NOMBRE, TOKEN) values (" + query2 + ", '" + cadeNum + "', 'CONE" + query2 + "')";
+                da = new MySqlDataAdapter(query, conexionBD);
+                ds = new DataSet();
+                da.Fill(ds);
+                conexionBD.Close();
+
+                query = "select TOKEN from CONSTANTE where NOMBRE like '%" + cadeNum + "%'";
+                da = new MySqlDataAdapter(query, conexionBD);
+                ds = new DataSet();
+                da.Fill(ds);
+                conexionBD.Close();
+
+                if (ds.Tables[0].Rows.Count != 0)
+                {
+                    dataGridView1.DataSource = ds.Tables[0];
+                    Token = dataGridView1.Rows[0].Cells[0].Value.ToString();
+                    txtToken.Text = txtToken.Text + Token + " ";
+
+                }
+
+
+            }
+
+            cadeNum = "";
 
 
         }
